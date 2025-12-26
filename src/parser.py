@@ -77,11 +77,24 @@ class NotamParser:
         ]
         return any(keyword in text_lower for keyword in closure_keywords)
     
+    # def _is_drone_related(self, text: str) -> bool:
+    #     """Check if closure is drone-related."""
+    #     text_lower = text.lower()
+    #     return any(keyword in text_lower for keyword in self.config.DRONE_KEYWORDS)
+
     def _is_drone_related(self, text: str) -> bool:
         """Check if closure is drone-related."""
-        text_lower = text.lower()
-        return any(keyword in text_lower for keyword in self.config.DRONE_KEYWORDS)
-    
+        text_lower = text.lower()    
+        for keyword in self.config.DRONE_KEYWORDS:
+            # Use word boundaries to match whole words only
+            pattern = r'\b' + re.escape(keyword.lower()) + r'\b'
+            if re.search(pattern, text_lower):
+                logger.info(f"NOTAM flagged as drone-related. Keyword found: '{keyword}'")
+                return True
+        
+        logger.debug("NOTAM not drone-related - no keywords found")
+        return False
+
     def _extract_reason(self, text: str) -> str:
         """Extract the reason for closure from NOTAM text."""
         # Try to extract reason from common patterns

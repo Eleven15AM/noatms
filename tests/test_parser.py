@@ -90,7 +90,30 @@ class TestNotamParser:
         assert result is not None
         assert result['is_drone_related'] is True
         assert result['closure_end'] is None  # PERM
-    
+
+    def test_parse_rov_closure(self, parser):
+        """Test parsing rov wording (e.g.g APPROVED) in closure."""
+        from datetime import datetime
+        now = datetime.now()
+        
+        notam_data = {
+            'facilityDesignator': 'LFPG',
+            'notamNumber': 'A0022/25',
+            'airportName': 'CHARLES DE GAULLE',
+            'issueDate': now.strftime('%m/%d/%Y %H%M'),
+            'startDate': now.strftime('%m/%d/%Y %H%M'),
+            'endDate': 'PERM',
+            'status': 'Active',
+            'cancelledOrExpired': False,
+            'icaoMessage': 'AD CLSD. FLT DURING CLOSURE PERIOD MUST BE PRIOR APPROVED ACFT'
+        }
+        
+        result = parser.parse_notam(notam_data)
+        
+        assert result is not None
+        assert result['is_drone_related'] is False
+        # assert result['closure_end'] is None  # PERM
+
     def test_skip_cancelled_notam(self, parser, sample_faa_notam):
         """Test that cancelled NOTAMs are skipped."""
         sample_faa_notam['cancelledOrExpired'] = True

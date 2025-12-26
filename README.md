@@ -2,6 +2,8 @@
 
 A Docker-based Python application for querying, storing, and reporting on Notice to Airmen (NOTAM) notifications for worldwide airports, with emphasis on drone-related closures. Is it adversaries, is it UAPs, is it morons with a joystick? Who knows!
 
+[![Build Image Status](https://github.com/Eleven15AM/noatms/actions/workflows/build-and-push.yml/badge.svg)](https://github.com/Eleven15AM/noatms/actions/workflows/build-and-push.yml)
+
 ## Description
 I built this app to process NOTAMs notices and hunt for keywords like 'drones' and 'balloons' (read UAPs) in airspace closures - yes, this is an attempt at getting information about UFOs/UAPs, get over it.
 
