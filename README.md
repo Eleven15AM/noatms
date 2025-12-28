@@ -62,7 +62,7 @@ You only need these things:
 
 ```bash
 # 1. Clone project, if you are forking change the username to the appropriate value
-git clone https://github.com/[USERNAME]/noatms
+git clone https://github.com/[USERNAME]/notams
 
 # 2. navigate in
 cd notams

@@ -24,7 +24,7 @@ make reports
 mkdir notams
 
 # Copy/clone/fork all files into the directory structure shown above
-git clone https://github.com/[USERNAME]/noatms
+git clone https://github.com/[USERNAME]/notams
 
 # move in
 cd notams
